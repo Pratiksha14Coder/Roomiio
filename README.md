@@ -2,6 +2,10 @@
 
 A Flask-based hostel management system for students, wardens, and admins.
 
+## 👥 Team Members
+- Pratiksha Gaikwad
+- Khanak pardeshi
+  
 ## 🚀 Features
 
 - ✅ Student registration and login
@@ -12,10 +16,7 @@ A Flask-based hostel management system for students, wardens, and admins.
 - ✅ Google OAuth login support
 - ✅ Profile management with photo upload
 
-## 👥 Team Members
 
-- Pratiksha Gaikwad
-- Khanak pardeshi
 
 ## 🛠️ Technologies Used
 **Flask** - Web Framework
@@ -33,4 +34,8 @@ python app.py
 ## 🔗 Live Demo
 
 **Coming Soon!** (Deploying on Railway...)
+
+## 🔗 GitHub Repository
+
+**https://github.com/Pratiksha14Coder/Roomiio**
 
