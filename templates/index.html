@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block title %}Home - Roomiio{% endblock %}
+{% block content %}
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-text">
+        <h1>Stay, Study, Succeed</h1>
+        <p>We Manage the Rest<br>Making life here more organized, safe, and social infinity.</p>
+        <a href="/check_auth_rooms" class="hero-btn">Explore Rooms</a>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="services-section">
+    <h2>Our Hostel Services</h2>
+    <div class="services-grid">
+
+        <!-- Admissions -->
+        <div class="service-box">
+            <h3>
+    <span class="service-icon">
+        <i class="fas fa-user-graduate"></i>
+    </span>
+    Admissions & Student Records
+</h3>
+<ul>
+                <li>Digital admission and registration process</li>
+                <li>Student profiles with guardian details</li>
+                <li>Initial room allocation during admission</li>
+            </ul>
+        </div>
+
+        <!-- Accommodation -->
+        <div class="service-box">
+           <h3>
+    <span class="service-icon">
+        <i class="fas fa-bed"></i>
+    </span>
+    Accommodation & Occupancy
+</h3>
+<ul>
+                <li>Real-time room/bed tracking</li>
+                <li>Automatic vacancy updates</li>
+                <li>Room transfer requests and approvals</li>
+                <li>Occupancy analytics for administrators</li>
+            </ul>
+        </div>
+
+        <!-- Finance -->
+        <div class="service-box">
+            <h3>
+    <span class="service-icon">
+        <i class="fas fa-wallet"></i>
+    </span>
+    Fees & Payments
+</h3>
+            <ul>
+                <li>Hostel fee collection (rent, deposits, utilities)</li>
+                <li>Online payment gateway integration</li>
+                <li>Automated invoices, receipts, and reminders</li>
+                <li>Pending payment and penalty tracking</li>
+            </ul>
+        </div>
+
+        <!-- Mess -->
+        <div class="service-box">
+            <h3>
+    <span class="service-icon">
+        <i class="fas fa-utensils"></i>
+    </span>
+    Mess & Food Services
+</h3>
+            <ul>
+                <li>Meal scheduling and menu planning</li>
+                <li>Food quality monitoring through student feedback</li>
+                <li>Mess fee collection and billing</li>
+                <li>Nutritional balance and dietary options tracking</li>
+            </ul>
+        </div>
+
+        <!-- Attendance -->
+        <div class="service-box">
+            <h3>
+    <span class="service-icon">
+        <i class="fas fa-chart-line"></i>
+    </span>
+    Reports & Analytics
+</h3>
+
+            <ul>
+                <li>Daily entry/exit monitoring (biometric/RFID)</li>
+                <li>Leave request submission and approval workflows</li>
+                <li>Visitor management system with approvals</li>
+                <li>ID card/biometric access control</li>
+                <li>Emergency alerts and notifications</li>
+            </ul>
+        </div>
+
+        <!-- Maintenance -->
+        <div class="service-box">
+            <h3>
+    <span class="service-icon">
+        <i class="fas fa-tools"></i>
+    </span>
+    Maintenance & Support
+</h3>
+            <ul>
+                <li>Online complaint registration (plumbing, electricity, etc.)</li>
+                <li>Service request tracking and staff assignment</li>
+                <li>SMS/Email alerts for updates, rules, and events</li>
+                <li>Parent/guardian communication portal</li>
+                <li>Reports on occupancy, finances, and student behavior</li>
+            </ul>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

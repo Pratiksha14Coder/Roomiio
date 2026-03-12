@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block title %}About Roomiio{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='about.css') }}">
+
+<section class="about-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>About Roomiio</h1>
+        <p>Smart Hostel Living Platform</p>
+    </div>
+</section>
+
+<section class="about-section reveal">
+<div class="about-container">
+<h2>Who We Are</h2>
+<p>
+Roomiio is a modern hostel management platform designed to simplify student accommodation.
+Our system helps students explore rooms, apply for accommodation, manage hostel fees,
+and communicate with hostel authorities digitally.
+</p>
+<p>
+With a focus on comfort, security, and efficient management, Roomiio provides
+a technology driven solution that improves hostel living experiences for both
+students and administrators.
+</p>
+</div>
+</section>
+
+<section class="vision-mission">
+<div class="vm-card reveal">
+<h3>Our Vision</h3>
+<p>
+To create a smart hostel ecosystem where students can easily access
+comfortable living spaces while hostel administrators manage operations
+efficiently through digital systems.
+</p>
+</div>
+<div class="vm-card reveal">
+<h3>Our Mission</h3>
+<p>
+Our mission is to simplify hostel management by providing a transparent,
+efficient, and student friendly digital platform for accommodation services.
+</p>
+</div>
+</section>
+
+<section class="stats-section">
+<h2>Roomiio In Numbers</h2>
+<div class="stats-grid">
+<div class="stat-box">
+<h3 class="counter" data-target="120">0</h3>
+<p>Total Rooms</p>
+</div>
+<div class="stat-box">
+<h3 class="counter" data-target="240">0</h3>
+<p>Student Capacity</p>
+</div>
+<div class="stat-box">
+<h3 class="counter" data-target="24">0</h3>
+<p>Facilities Available</p>
+</div>
+<div class="stat-box">
+<h3 class="counter" data-target="100">0</h3>
+<p>% Secure Campus</p>
+</div>
+</div>
+</section>
+
+<section class="features-section">
+<h2>Why Choose Roomiio?</h2>
+<div class="features-grid">
+<div class="feature-card reveal">
+<h4>Smart Room Allocation</h4>
+<p>Digital room allocation system for hostel administrators.</p>
+</div>
+<div class="feature-card reveal">
+<h4>Secure Login System</h4>
+<p>Protected authentication for students and hostel staff.</p>
+</div>
+<div class="feature-card reveal">
+<h4>Online Fee Management</h4>
+<p>Students can easily track and manage hostel fees online.</p>
+</div>
+<div class="feature-card reveal">
+<h4>Modern Hostel Facilities</h4>
+<p>Comfortable environment designed for students.</p>
+</div>
+</div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    window.addEventListener('scroll', () => {
+        var reveals = document.querySelectorAll('.reveal');
+        for(var i=0;i<reveals.length;i++){
+            var windowheight = window.innerHeight;
+            var revealtop = reveals[i].getBoundingClientRect().top;
+            var revealpoint = 150;
+            if(revealtop < windowheight - revealpoint){
+                reveals[i].classList.add('active');
+            }
+        }
+    });
+
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach(counter => {
+        counter.innerText = '0';
+        const updateCounter = () => {
+            const target = +counter.getAttribute('data-target');
+            const count = +counter.innerText;
+            const increment = target / 100;
+            if(count < target){
+                counter.innerText = `${Math.ceil(count + increment)}`;
+                setTimeout(updateCounter,20);
+            } else {
+                counter.innerText = target;
+            }
+        };
+        updateCounter();
+    });
+
+});
+</script>
+
+{% endblock %}

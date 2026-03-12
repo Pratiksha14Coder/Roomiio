@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}{{ service.name }} - Roomiio{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>{{ service.name }}</h1>
+    <img src="{{ url_for('static', filename='images/' + service.image) }}" alt="{{ service.name }}" style="max-width: 100%;">
+    <p>{{ service.details }}</p>
+    <p><strong>Price:</strong> {{ service.price }}</p>
+</div>
+{% endblock %}

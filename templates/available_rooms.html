@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Available Rooms - Roomiio{% endblock %}
+{% block content %}
+<div class="container" style="padding: 40px 20px;">
+    <div class="page-header">
+        <h1>Select Your Room</h1>
+        <p>Choose from the available options below</p>
+    </div>
+    
+    <div class="rooms-grid">
+        {% for r in rooms %}
+        <div class="room-card">
+            <div class="room-image-container">
+                <img src="{{ url_for('static', filename='images/room/' + r.img) }}" alt="{{ r.name }}">
+                <div class="room-badge">{{ r.price }}</div>
+            </div>
+            <div class="room-content">
+                <h3>{{ r.name }}</h3>
+                <p class="room-desc">Comfortable accommodation with all essential amenities included.</p>
+                <div class="room-features">
+                    <span><i class="fas fa-wifi"></i> WiFi</span>
+                    <span><i class="fas fa-bed"></i> Bed</span>
+                    {% if r.type.startswith('ac-') %}
+                        <span><i class="fas fa-snowflake"></i> AC</span>
+                    {% else %}
+                        <span><i class="fas fa-fan"></i> Fan</span>
+                    {% endif %}
+                </div>
+                <a href="/room/{{ r.type }}" class="room-btn">View Details</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

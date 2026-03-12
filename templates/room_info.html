@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ room.name }} - Roomiio
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <!-- Room Name Centered -->
+    <h2 style="text-align: center; margin-bottom: 20px;">{{ room.name }}</h2>
+
+    {% if room.image %}
+        <div style="text-align: center;">
+            <img src="{{ url_for('static', filename='images/room/' + room.image) }}"
+                 alt="{{ room.name }}"
+                 style="max-width: 100%; height: auto; border-radius: 10px;">
+        </div>
+    {% else %}
+        <p>No image available.</p>
+    {% endif %}
+
+    <p style="margin-top: 20px;">{{ room.details }}</p>
+    <p><strong>Price:</strong> {{ room.price }}</p>
+
+    <!-- Apply Button -->
+    <div style="margin-top: 30px; text-align: center;">
+        {% if session.get('user_id') and session.get('role') == 'student' %}
+            <a href="/apply/{{ room_type }}" class="apply-btn">Apply for this Room</a>
+        {% elif session.get('user_id') and session.get('role') != 'student' %}
+            <p style="color: red;">Only students can apply for rooms.</p>
+        {% else %}
+            <a href="/login_page?next=available_rooms" class="apply-btn">Login to Apply</a>
+        {% endif %}
+    </div>
+
+    <div style="margin-top: 20px;">
+        <a href="/available_rooms">&larr; Back to all rooms</a>
+    </div>
+</div>
+{% endblock %}

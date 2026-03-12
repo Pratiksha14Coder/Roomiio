@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Login - Roomiio{% endblock %}
+{% block content %}
+<div class="auth-page-wrapper">
+    <!-- Glass Card -->
+    <div class="glass-card">
+        <!-- Logo -->
+        <div class="auth-logo">
+            <h1>ROOMIIO</h1>
+            <p>Built for Students.Designed for Success.</p>
+        </div>
+        
+        <!-- Title -->
+        <div class="auth-title">
+            <h2>Welcome Back!</h2>
+            <p>Sign in to continue</p>
+        </div>
+        
+        <!-- Form -->
+        <form method="POST" action="/login">
+            <input type="hidden" name="next" value="{{ request.args.get('next') }}">
+            
+            <!-- REMOVED: Role dropdown - not needed during login -->
+            
+            <div class="floating-group">
+                <input type="email" name="email" class="floating-input" placeholder="Email Address" required>
+            </div>
+            
+            <div class="floating-group">
+                <input type="password" name="password" class="floating-input" placeholder="Password" required>
+            </div>
+            
+            <button type="submit" class="professional-btn">Sign In</button>
+        </form>
+        
+        <div class="auth-divider">
+            <span></span>
+            <p>or</p>
+            <span></span>
+        </div>
+        
+        <a href="/login/google" class="google-professional-btn">
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google">
+            Continue with Google
+        </a>
+        
+        <div class="auth-footer">
+            <p>New to Roomiio? <a href="/register">Create account</a></p>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

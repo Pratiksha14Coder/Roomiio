@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+{% block title %}Register - Roomiio{% endblock %}
+
+{% block content %}
+
+<div class="auth-page-wrapper">
+
+<div class="glass-card">
+
+    <div class="auth-logo">
+        <h1>ROOMIIO</h1>
+        <p>Built for Students. Designed for Success.</p>
+    </div>
+
+    <div class="auth-title">
+        <h2>Create Account</h2>
+        <p>Join Roomiio today</p>
+    </div>
+
+    <!-- REGISTER FORM -->
+    <form method="POST" action="/register" onsubmit="return validateForm()">
+
+        <!-- Full Name -->
+        <div class="floating-group">
+            <input 
+                type="text"
+                name="name"
+                class="floating-input"
+                placeholder="Full Name"
+                required
+                minlength="2"
+            >
+        </div>
+
+        <!-- Email -->
+        <div class="floating-group">
+            <input
+                type="email"
+                name="email"
+                class="floating-input"
+                placeholder="Email Address"
+                required
+            >
+        </div>
+
+        <!-- Password -->
+        <div class="floating-group">
+            <input
+                type="password"
+                id="password"
+                name="password"
+                class="floating-input"
+                placeholder="Password"
+                required
+                minlength="6"
+            >
+        </div>
+
+        <!-- Confirm Password -->
+        
+<div class="floating-group">
+
+    <input
+        type="password"
+        id="confirmPassword"
+        name="confirm_password"
+        class="floating-input"
+        placeholder="Confirm Password"
+        required
+    >
+
+    <small id="passwordMessage"></small>
+
+</div>
+
+        <!-- Role -->
+        <div class="floating-group select-wrapper">
+
+            <select
+                name="role"
+                class="floating-input floating-select"
+                required
+            >
+                <option value="" disabled selected>Select Role</option>
+                <option value="student">Student</option>
+                <option value="warden">Hostel Warden</option>
+                <option value="admin">System Authority</option>
+            </select>
+
+        </div>
+        <div class="floating-group" id="secretKeyDiv" style="display:none;">
+    <input type="password" name="secret_key" class="floating-input" placeholder="Enter Secret Key">
+</div>
+
+<script>
+const roleSelect = document.querySelector('select[name="role"]');
+const secretDiv = document.getElementById('secretKeyDiv');
+
+roleSelect.addEventListener('change', () => {
+    if(roleSelect.value === 'admin' || roleSelect.value === 'warden') {
+        secretDiv.style.display = 'block';
+    } else {
+        secretDiv.style.display = 'none';
+    }
+});
+</script>
+
+        <!-- Submit Button -->
+        <button type="submit" class="professional-btn">
+            Create Account
+        </button>
+
+    </form>
+
+    <div class="auth-footer">
+        <p>
+            Already have an account?
+            <a href="/login_page">Sign in</a>
+        </p>
+    </div>
+
+</div>
+
+
+</div>
+<script>
+
+const password = document.getElementById("password");
+const confirmPassword = document.getElementById("confirmPassword");
+const message = document.getElementById("passwordMessage");
+const submitBtn = document.querySelector("button[type='submit']");
+
+function checkPassword(){
+
+    const pass = password.value;
+    const confirm = confirmPassword.value;
+
+    if(confirm === ""){
+        confirmPassword.classList.remove("password-match","password-mismatch");
+        message.textContent = "";
+        submitBtn.disabled = false;
+        return;
+    }
+
+    if(pass === confirm){
+
+        confirmPassword.classList.add("password-match");
+        confirmPassword.classList.remove("password-mismatch");
+
+        message.textContent = "Password match ✓";
+        message.style.color = "green";
+
+        submitBtn.disabled = false;
+
+    } 
+    else {
+
+        confirmPassword.classList.add("password-mismatch");
+        confirmPassword.classList.remove("password-match");
+
+        message.textContent = "Password do not match";
+        message.style.color = "red";
+
+        submitBtn.disabled = true;
+    }
+
+}
+
+password.addEventListener("input",checkPassword);
+confirmPassword.addEventListener("input",checkPassword);
+
+</script>
+
+{% endblock %}

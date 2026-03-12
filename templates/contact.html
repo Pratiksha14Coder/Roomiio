@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Contact Us - Roomiio{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>Contact Us</h1>
+    <form method="POST" action="/submit_complaint">
+        <select name="help_topic" required>
+            <option value="">What can we help you with?</option>
+            <option value="registration">Registration Issues (e.g., account creation, email verification)</option>
+            <option value="room_assignment">Room Assignment (e.g., allocation, transfer, availability)</option>
+            <option value="fees">Fees and Payments (e.g., unpaid bills, refunds, payment methods)</option>
+            <option value="services">Hostel Services (e.g., WiFi, laundry, cleaning)</option>
+            <option value="complaints">General Complaints (e.g., maintenance, noise, facilities)</option>
+            <option value="other">Other (please specify in details)</option>
+        </select>
+        <!-- Name -->
+        <div class="floating-group">
+            <input type="text" name="name" placeholder=" " required>
+            <label>Your Name</label>
+        </div>
+
+        <!-- Email -->
+        <div class="floating-group">
+            <input type="email" name="email" placeholder=" " required>
+            <label>Email associated with your account</label>
+        </div>
+
+        <!-- Subject -->
+        <div class="floating-group">
+            <input type="text" name="subject" placeholder=" " required>
+            <label>Subject</label>
+        </div>
+
+        <!-- Complaint Details -->
+        <div class="floating-group">
+            <textarea name="complaint" placeholder=" " required></textarea>
+            <label>Details of your query / complaint</label>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert {{ 'alert-' + category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>
+{% endblock %}

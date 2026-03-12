@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block title %}{{ table_name|capitalize }} Table - Roomiio{% endblock %}
+
+{% block content %}
+<div class="database-page">
+
+    <div class="database-header" style="text-align: center; margin-bottom: 20px;">
+        <h1><i class="fas fa-table"></i> {{ table_name|capitalize }}</h1>
+        <span class="admin-badge">ADMIN ONLY</span>
+    </div>
+
+    <div class="button-group" style="text-align: center; margin-bottom: 20px;">
+        <a href="{{ url_for('view_database') }}" class="btn btn-primary">
+            <i class="fas fa-database"></i> All Tables
+        </a>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">
+            <i class="fas fa-tachometer-alt"></i> Dashboard
+        </a>
+        <a href="{{ url_for('home') }}" class="btn btn-success">
+            <i class="fas fa-home"></i> Home
+        </a>
+    </div>
+
+    <hr class="divider">
+
+    <!-- Stats Card -->
+    <div class="stats-card">
+        <div class="stat-item">
+            <i class="fas fa-database"></i>
+            <span class="stat-label">Table Name:</span>
+            <span class="stat-value">{{ table_name }}</span>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-list"></i>
+            <span class="stat-label">Total Rows:</span>
+            <span class="stat-value">{{ row_count }}</span>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-columns"></i>
+            <span class="stat-label">Total Columns:</span>
+            <span class="stat-value">{{ columns|length }}</span>
+        </div>
+    </div>
+
+    <!-- Search Box -->
+    <div class="search-container" style="margin: 20px 0;">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Search in this table..." onkeyup="searchTable()">
+        <span class="search-hint">Press ESC to clear</span>
+    </div>
+
+    <!-- Table -->
+    <div class="table-section">
+        <div class="table-container">
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        {% for col in columns %}
+                        <th>{{ col|capitalize }}</th>
+                        {% endfor %}
+                        {% if table_name == 'complaints' %}
+                        <th>Reply</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in rows %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        {% for cell in row %}
+                        <td>{{ cell }}</td>
+                        {% endfor %}
+
+                        {% if table_name == 'complaints' %}
+                        <td>
+                            {% if not row[8] %}
+                            <form method="POST" action="{{ url_for('reply_complaint', complaint_id=row[0]) }}">
+                                <input type="text" name="reply" placeholder="Enter reply..." required>
+                                <button type="submit">Send</button>
+                            </form>
+                            {% else %}
+                            <span>{{ row[8] }}</span> <br>
+                            <small>Replied at: {{ row[9] }}</small>
+                            {% endif %}
+                        </td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            {% if rows|length == 0 %}
+            <div class="empty-state" style="text-align: center; padding: 20px;">
+                <i class="fas fa-inbox"></i>
+                <p>No data found in this table</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="button-group center" style="text-align: center; margin-top: 20px;">
+        <a href="{{ url_for('view_database') }}" class="btn btn-primary">
+            <i class="fas fa-arrow-left"></i> Back to Database
+        </a>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">
+            <i class="fas fa-tachometer-alt"></i> Dashboard
+        </a>
+    </div>
+
+</div>
+
+<script>
+    // ESC clears search
+    document.addEventListener('keydown', (e) => {
+        if (e.key === "Escape") {
+            document.getElementById('searchInput').value = '';
+            searchTable();
+        }
+    });
+
+    // Table search filter
+    function searchTable() {
+        let input = document.getElementById('searchInput').value.toLowerCase();
+        let table = document.getElementById('dataTable');
+        let rows = table.getElementsByTagName('tr');
+
+        for (let i = 1; i < rows.length; i++) {
+            let cells = rows[i].getElementsByTagName('td');
+            let match = false;
+            for (let j = 0; j < cells.length; j++) {
+                if (cells[j].innerText.toLowerCase().indexOf(input) > -1) {
+                    match = true;
+                    break;
+                }
+            }
+            rows[i].style.display = match ? '' : 'none';
+        }
+    }
+</script>
+{% endblock %}
