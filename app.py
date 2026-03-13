@@ -432,7 +432,7 @@ def login_google():
 @app.route('/login/google/authorized')
 def authorized():
     token = oauth.google.authorize_access_token()
-    user_info = oauth.google.get('userinfo').json()
+    user_info = oauth.google.get("https://www.googleapis.com/oauth2/v3/userinfo").json()
     email = user_info['email']
     name = user_info['name']
     google_pic = user_info.get('picture')
