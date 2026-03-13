@@ -435,7 +435,11 @@ def authorized():
     user_info = oauth.google.get('userinfo').json()
     email = user_info['email']
     name = user_info['name']
-    google_pic = user_info.get('picture', None)  # Google's profile pic
+    google_pic = user_info.get('picture')
+
+# Fix Google profile image URL
+    if google_pic:
+        google_pic = google_pic.split('=')[0] + "=s200"# Google's profile pic
 
     conn = sqlite3.connect('database.db')
     c = conn.cursor()
