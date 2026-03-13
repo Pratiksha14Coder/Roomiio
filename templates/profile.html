@@ -17,14 +17,16 @@
 
         <p>Current:</p>
 
-        {% if 'http' in user[2] %}
+        {% if user[2].startswith('http') %}
+    <img src="{{ user[2] }}" 
+         alt="Profile Pic"
+         referrerpolicy="no-referrer"
+         style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+{% else %}
             <img src="{{ user[2] }}" 
-                 alt="Profile Pic"
-                 style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
-        {% else %}
-            <img src="{{ url_for('static', filename=user[2].replace('static/', '')) }}"
-                 alt="Profile Pic"
-                 style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+     alt="Profile Pic"
+     referrerpolicy="no-referrer"
+     style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
         {% endif %}
 
         <br><br>
