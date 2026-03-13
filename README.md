@@ -1,6 +1,8 @@
 # Roomiio - Hostel Management System
-
 A Flask-based hostel management system for students, wardens, and admins.
+[![Demo](https://img.shields.io/badge/Live_Demo-roomiio.onrender.com-00D4AA?style=flat&logo=render)](https://roomiio.onrender.com)
+
+**🔴 LIVE:** https://roomiio.onrender.com
 
 ## 👥 Team Members
 - Pratiksha Gaikwad
@@ -21,9 +23,10 @@ A Flask-based hostel management system for students, wardens, and admins.
 ## 🛠️ Technologies Used
 **Flask** - Web Framework
 - **SQLite** - Database
-- **Python** - Backend Language
+- **Python 3.14** - Backend Language
 - **HTML/CSS/JS** - Frontend
 - **Google OAuth** - Authentication
+- **Authlib Deploy**: Render.com 
 - **Gunicorn** - Production Server
 - **python-dotenv** - Environment Variables
 
@@ -31,9 +34,9 @@ A Flask-based hostel management system for students, wardens, and admins.
 
 pip install -r requirements.txt
 python app.py
-## 🔗 Live Demo
 
-**Coming Soon!** (Deploying on Railway...)
+## 🔗 Live Demo
+(https://roomiio.onrender.com)
 
 ## 🔗 GitHub Repository
 
