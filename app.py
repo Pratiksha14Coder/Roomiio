@@ -12,6 +12,7 @@ import re
 import socket
 import dns.resolver
 
+
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "roomiio_dev_key")
 oauth = OAuth(app)
@@ -21,11 +22,10 @@ oauth.register(
     name='google',
     client_id=GOOGLE_CLIENT_ID,
     client_secret=GOOGLE_CLIENT_SECRET,
-    authorize_url='https://accounts.google.com/o/oauth2/auth',
-    access_token_url='https://accounts.google.com/o/oauth2/token',
-    api_base_url='https://www.googleapis.com/oauth2/v2/',
-    jwks_uri='https://www.googleapis.com/oauth2/v3/certs',
-    client_kwargs={'scope': 'openid email profile'}
+    server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
+    client_kwargs={
+        'scope': 'openid email profile'
+    }
 )
 
 # Database and other functions
@@ -432,7 +432,7 @@ def login_google():
 @app.route('/login/google/authorized')
 def authorized():
     token = oauth.google.authorize_access_token()
-    user_info = oauth.google.get('https://www.googleapis.com/oauth2/v2/userinfo').json()
+    user_info = oauth.google.get('userinfo').json()
     email = user_info['email']
     name = user_info['name']
     google_pic = user_info.get('picture', None)  # Google's profile pic
