@@ -4,7 +4,7 @@ __pycache__/
 database.db
 its_confidential.json
 .env
-config.py
+##config.py
 venv/
 *.log
 .DS_Store
