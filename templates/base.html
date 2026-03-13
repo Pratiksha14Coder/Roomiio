@@ -39,7 +39,10 @@
                 <div class="profile-container" onclick="toggleMenu()">
                     <div class="profile-wrapper">
                         <span class="hello-msg">Hello, {{ current_user.name.split()[0] }}</span>
-                        <img src="{{ current_user.profile_pic }}" alt="Profile" class="profile-pic">
+                        <img src="{{ current_user.profile_pic }}" 
+                             alt="Profile" 
+                             class="profile-pic"
+                            referrerpolicy="no-referrer">
                         <i class="fas fa-chevron-down arrow"></i>
                     </div>
                     
