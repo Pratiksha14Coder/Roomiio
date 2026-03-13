@@ -432,46 +432,49 @@ def login_google():
 @app.route('/login/google/authorized')
 def authorized():
     token = oauth.google.authorize_access_token()
-    user_info = oauth.google.get("https://www.googleapis.com/oauth2/v3/userinfo").json()
-    email = user_info['email']
-    name = user_info['name']
-    google_pic = user_info.get('picture')
 
-# Fix Google profile image URL
+    resp = oauth.google.get("https://www.googleapis.com/oauth2/v3/userinfo")
+
+    if resp.status_code != 200:
+        flash("Google login failed. Please try again.", "error")
+        return redirect(url_for("login_page"))
+
+    user_info = resp.json()
+
+    email = user_info.get("email")
+    name = user_info.get("name")
+    google_pic = user_info.get("picture")
+
+    # Fix Google profile picture size
     if google_pic:
-        google_pic = google_pic.split('=')[0] + "=s200"# Google's profile pic
+        google_pic = google_pic.split('=')[0] + "=s200"
 
     conn = sqlite3.connect('database.db')
     c = conn.cursor()
-    
-    # Fetch user from DB
+
     c.execute("SELECT id, role, profile_pic FROM users WHERE email=?", (email,))
     user = c.fetchone()
 
     if not user:
-        # New user, save Google pic if exists
         c.execute(
             "INSERT INTO users (name, email, role, profile_pic) VALUES (?, ?, 'student', ?)",
             (name, email, google_pic or 'static/images/default-profile.png')
         )
         conn.commit()
         user_id = c.lastrowid
-        role = 'student'
-        profile_pic = google_pic or 'static/images/default-profile.png'
+        role = "student"
     else:
         user_id, role, profile_pic = user
-        # Only update profile_pic if it's still default
+
         if profile_pic == 'static/images/default-profile.png' and google_pic:
             c.execute("UPDATE users SET profile_pic=? WHERE id=?", (google_pic, user_id))
             conn.commit()
-            profile_pic = google_pic  # update the variable
 
     conn.close()
-    
-    # Set session
+
     session['user_id'] = user_id
     session['role'] = role
-    
+
     return redirect(url_for('dashboard'))
 
 @app.route('/dashboard')
